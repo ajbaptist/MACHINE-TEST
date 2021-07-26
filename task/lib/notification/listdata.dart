@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+
+FlutterLocalNotificationsPlugin notifications =
+    FlutterLocalNotificationsPlugin();
 
 class MyList extends StatefulWidget {
   const MyList({Key? key}) : super(key: key);
@@ -23,6 +27,12 @@ class _MyListState extends State<MyList> {
 
   @override
   void initState() {
+    FlutterLocalNotificationsPlugin Notifications =
+        FlutterLocalNotificationsPlugin();
+    var android = AndroidInitializationSettings('@mipmap/ic_launcher');
+    var ios = IOSInitializationSettings();
+    var init = InitializationSettings(android: android, iOS: ios);
+    Notifications.initialize(init);
     future();
     super.initState();
   }
@@ -37,20 +47,35 @@ class _MyListState extends State<MyList> {
       body: list.isEmpty
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
-              itemBuilder: (context, index) => Card(
-                child: ListTile(
-                  onTap: () {
-                    print([index]);
-                  },
-                  leading: CircleAvatar(
-                    backgroundImage: NetworkImage(list[index]['avatar']),
+              shrinkWrap: true,
+              itemBuilder: (context, index) => ListView.builder(
+                shrinkWrap: true,
+                itemCount: list.length,
+                itemBuilder: (context, index) => Card(
+                  child: ListTile(
+                    onTap: () {
+                      show(list[index]['first_name'], list[index]['email']);
+                    },
+                    leading: CircleAvatar(
+                      backgroundImage: NetworkImage(list[index]['avatar']),
+                    ),
+                    title: Text(
+                        "${list[index]['first_name']}  ${list[index]['last_name']}"),
                   ),
-                  title: Text(
-                      "${list[index]['first_name']}  ${list[index]['last_name']}"),
                 ),
               ),
-              itemCount: list.length,
+              itemCount: 1,
             ),
     );
   }
+}
+
+Future show(String firstName, email) async {
+  var ios = IOSNotificationDetails();
+  var android = AndroidNotificationDetails(
+      'channelId', 'channelName', 'channelDescription',
+      priority: Priority.high, importance: Importance.max);
+
+  var plat = NotificationDetails(android: android, iOS: ios);
+  await notifications.show(1, firstName, email, plat);
 }
