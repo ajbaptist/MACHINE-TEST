@@ -2,6 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 
+final mystyle = TextStyle(
+  fontWeight: FontWeight.bold,
+  fontSize: 17,
+);
+
 FlutterLocalNotificationsPlugin notifications =
     FlutterLocalNotificationsPlugin();
 
@@ -15,10 +20,10 @@ class MyList extends StatefulWidget {
 class _MyListState extends State<MyList> {
   Future future() async {
     Dio dio = Dio();
-    var response = await dio.get("https://reqres.in/api/users?page=2");
+    var response = await dio.get("https://jsonplaceholder.typicode.com/users");
     setState(() {
       var data = response.data;
-      list = data['data'];
+      list = data;
       print(list);
     });
   }
@@ -48,23 +53,81 @@ class _MyListState extends State<MyList> {
           ? Center(child: CircularProgressIndicator())
           : ListView.builder(
               shrinkWrap: true,
-              itemBuilder: (context, index) => ListView.builder(
-                shrinkWrap: true,
-                itemCount: list.length,
-                itemBuilder: (context, index) => Card(
-                  child: ListTile(
-                    onTap: () {
-                      show(list[index]['first_name'], list[index]['email']);
-                    },
-                    leading: CircleAvatar(
-                      backgroundImage: NetworkImage(list[index]['avatar']),
+              physics: ClampingScrollPhysics(),
+              itemBuilder: (context, index) => Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "${index + 1}.${list[index]['name']}".toUpperCase(),
+                      style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                          color: Colors.teal),
                     ),
-                    title: Text(
-                        "${list[index]['first_name']}  ${list[index]['last_name']}"),
-                  ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: 1,
+                        physics: ClampingScrollPhysics(),
+                        itemBuilder: (context, ix) => Column(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                GestureDetector(
+                                  onTap: () => show(list[index]['name'],
+                                      list[index]['email']),
+                                  child: Text(
+                                    "Email: ".toUpperCase() +
+                                        list[index]['email']
+                                            .toString()
+                                            .toUpperCase(),
+                                    style: mystyle,
+                                  ),
+                                ),
+                                Divider(
+                                  color: Colors.grey,
+                                ),
+                                GestureDetector(
+                                  onTap: () => show(list[index]['name'],
+                                      list[index]['phone']),
+                                  child: Text(
+                                    "Phone: ".toUpperCase() +
+                                        list[index]['phone']
+                                            .toString()
+                                            .toUpperCase(),
+                                    style: mystyle,
+                                  ),
+                                ),
+                                Divider(
+                                  color: Colors.grey,
+                                ),
+                                GestureDetector(
+                                  onTap: () => show(list[index]['name'],
+                                      list[index]['website']),
+                                  child: Text(
+                                    "WebSite: ".toUpperCase() +
+                                        list[index]['website']
+                                            .toString()
+                                            .toUpperCase(),
+                                    style: mystyle,
+                                  ),
+                                ),
+                                Divider(
+                                  color: Colors.grey,
+                                ),
+                                SizedBox(
+                                  height: 5,
+                                ),
+                              ],
+                            ))
+                  ],
                 ),
               ),
-              itemCount: 1,
+              itemCount: list.length,
             ),
     );
   }
