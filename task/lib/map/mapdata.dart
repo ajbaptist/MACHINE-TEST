@@ -1,4 +1,5 @@
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:task/map/map.dart';
 
 LatLng latLng = LatLng(11.059821, 78.387451);
 LatLng latLng2 = LatLng(17.123184, 79.208824);
@@ -6,9 +7,16 @@ LatLng latLng3 = LatLng(23.473324, 77.947998);
 LatLng latLng4 = LatLng(29.065773, 76.040497);
 LatLng latLng5 = LatLng(23.745127, 91.746826);
 
+Marker tnMarker1 = Marker(
+    infoWindow: InfoWindow(
+      title: 'YOU ARE HERE',
+    ),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
+    position: mylocation,
+    markerId: MarkerId('YOUR LOCATION'));
 Marker tnMarker = Marker(
     infoWindow: InfoWindow(title: 'TAMIL NADU', snippet: latLng.toString()),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
+    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueMagenta),
     position: latLng,
     markerId: MarkerId('TAMIL NADU'));
 Marker tlMarker = Marker(
