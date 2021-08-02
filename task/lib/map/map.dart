@@ -45,15 +45,10 @@ class _SimpleMapState extends State<SimpleMap> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          future();
-        },
-        child: Icon(Icons.my_location),
-      ),
       appBar: AppBar(
         centerTitle: true,
-        title: Text('GOOGLE MAP'),
+        title: Text('Google Map'),
+        actions: [IconButton(onPressed: future, icon: Icon(Icons.refresh))],
       ),
       body: GoogleMap(
           markers: {
@@ -70,4 +65,8 @@ class _SimpleMapState extends State<SimpleMap> {
               CameraPosition(tilt: 74, zoom: 4, target: latLng3)),
     );
   }
+}
+
+_future(String data) {
+  return data;
 }
