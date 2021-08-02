@@ -23,16 +23,23 @@ class _SimpleMapState extends State<SimpleMap> {
 
   Future<void> future() async {
     Position position = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.best);
+        desiredAccuracy: LocationAccuracy.bestForNavigation);
 
     setState(() {
       lat = position.latitude;
       lng = position.longitude;
       isChecked = true;
-      controller!.animateCamera(CameraUpdate.newLatLng(mylocation));
+      controller!.animateCamera(CameraUpdate.newCameraPosition(
+          CameraPosition(zoom: 10, target: mylocation)));
 
       print({mylocation, isChecked});
     });
+  }
+
+  @override
+  void initState() {
+    future();
+    super.initState();
   }
 
   @override
@@ -59,10 +66,8 @@ class _SimpleMapState extends State<SimpleMap> {
           },
           mapType: MapType.normal,
           onMapCreated: onMapCreated,
-          initialCameraPosition: CameraPosition(
-              tilt: 74,
-              zoom: 8,
-              target: isChecked == false ? latLng3 : mylocation)),
+          initialCameraPosition:
+              CameraPosition(tilt: 74, zoom: 4, target: latLng3)),
     );
   }
 }
