@@ -1,6 +1,4 @@
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:task/map/map.dart';
 
 LatLng latLng = LatLng(11.059821, 78.387451);
 LatLng latLng2 = LatLng(17.123184, 79.208824);
