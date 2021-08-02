@@ -31,7 +31,7 @@ class _SimpleMapState extends State<SimpleMap> {
       isChecked = true;
       controller!.animateCamera(CameraUpdate.newLatLng(mylocation));
 
-      print({lat, isChecked});
+      print({mylocation, isChecked});
     });
   }
 
