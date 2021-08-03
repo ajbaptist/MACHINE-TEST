@@ -50,12 +50,14 @@ class _SimpleMapState extends State<SimpleMap> {
         actions: [IconButton(onPressed: null, icon: Icon(Icons.refresh_sharp))],
       ),
       body: GoogleMap(
+          myLocationEnabled: true,
           markers: {
             Marker(
                 infoWindow: InfoWindow(
                     title: isChecked == false
-                        ? 'HII'
-                        : getDistance(mylocation!, latLng).toString(),
+                        ? 'ENSURE YOUR LOCATION'
+                        : getDistance(mylocation!, latLng).toString() +
+                            "KM AWAY",
                     snippet: latLng.toString()),
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueMagenta),
@@ -64,8 +66,9 @@ class _SimpleMapState extends State<SimpleMap> {
             Marker(
                 infoWindow: InfoWindow(
                     title: isChecked == false
-                        ? 'HII'
-                        : getDistance(mylocation!, latLng2).toString(),
+                        ? 'ENSURE YOUR LOCATION'
+                        : getDistance(mylocation!, latLng2).toString() +
+                            "KM AWAY",
                     snippet: latLng2.toString()),
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueAzure),
@@ -74,8 +77,9 @@ class _SimpleMapState extends State<SimpleMap> {
             Marker(
                 infoWindow: InfoWindow(
                     title: isChecked == false
-                        ? 'HII'
-                        : getDistance(mylocation!, latLng3).toString(),
+                        ? 'ENSURE YOUR LOCATION'
+                        : getDistance(mylocation!, latLng3).toString() +
+                            "KM AWAY",
                     snippet: latLng3.toString()),
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueViolet),
@@ -84,8 +88,9 @@ class _SimpleMapState extends State<SimpleMap> {
             Marker(
                 infoWindow: InfoWindow(
                     title: isChecked == false
-                        ? 'HII'
-                        : getDistance(mylocation!, latLng4).toString(),
+                        ? 'ENSURE YOUR LOCATION'
+                        : getDistance(mylocation!, latLng4).toString() +
+                            "KM AWAY",
                     snippet: latLng4.toString()),
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueOrange),
@@ -94,8 +99,9 @@ class _SimpleMapState extends State<SimpleMap> {
             Marker(
                 infoWindow: InfoWindow(
                     title: isChecked == false
-                        ? 'HII'
-                        : getDistance(mylocation!, latLng5).toString(),
+                        ? 'ENSURE YOUR LOCATION'
+                        : getDistance(mylocation!, latLng5).toString() +
+                            "KM AWAY",
                     snippet: latLng5.toString()),
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueCyan),
@@ -114,7 +120,9 @@ class _SimpleMapState extends State<SimpleMap> {
 getDistance(LatLng from, to) {
   double distance = Geolocator.distanceBetween(
       from.latitude, from.longitude, to.latitude, to.longitude);
+  String string = "";
 
-  print(distance);
-  return distance;
+  print(distance.toString());
+  string = distance.truncate().toString();
+  return string.substring(0, string.length - 3);
 }
