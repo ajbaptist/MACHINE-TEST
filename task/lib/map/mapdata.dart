@@ -6,11 +6,3 @@ LatLng latLng3 = LatLng(11.916064, 79.812325);
 LatLng latLng4 = LatLng(29.065773, 76.040497);
 LatLng latLng5 = LatLng(23.745127, 91.746826);
 LatLng? mylocation;
-
-Marker tnMarker1 = Marker(
-    infoWindow: InfoWindow(
-      title: 'YOU ARE HERE',
-    ),
-    icon: BitmapDescriptor.defaultMarkerWithHue(BitmapDescriptor.hueYellow),
-    position: mylocation!,
-    markerId: MarkerId('YOUR LOCATION'));
