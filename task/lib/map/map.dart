@@ -84,7 +84,7 @@ class _SimpleMapState extends State<SimpleMap> {
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueViolet),
                 position: latLng3,
-                markerId: MarkerId('MADHYA PRADESH')),
+                markerId: MarkerId('PUDHUCHERRY')),
             Marker(
                 infoWindow: InfoWindow(
                     title: isChecked == false
