@@ -62,7 +62,7 @@ class _SimpleMapState extends State<SimpleMap> {
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueMagenta),
                 position: latLng,
-                markerId: MarkerId('TAMIL NADU')),
+                markerId: MarkerId('CUDDALORE')),
             Marker(
                 infoWindow: InfoWindow(
                     title: isChecked == false
@@ -73,7 +73,7 @@ class _SimpleMapState extends State<SimpleMap> {
                 icon: BitmapDescriptor.defaultMarkerWithHue(
                     BitmapDescriptor.hueAzure),
                 position: latLng2,
-                markerId: MarkerId('TELANGANA')),
+                markerId: MarkerId('CHENNAI')),
             Marker(
                 infoWindow: InfoWindow(
                     title: isChecked == false
